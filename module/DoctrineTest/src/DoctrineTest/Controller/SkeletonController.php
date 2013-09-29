@@ -13,6 +13,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Doctrine\ORM\EntityManager;
+use DoctrineTest\ontroller\Cmyclase;
 
 class SkeletonController extends AbstractActionController implements ServiceLocatorAwareInterface
 {
