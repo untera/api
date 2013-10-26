@@ -2,12 +2,12 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link      http://github.com/zendframework/Mapper for the canonical source repository
+ * @link      http://github.com/zendframework/RestResource for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Mapper;
+namespace Paste;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
@@ -34,11 +34,17 @@ class Module implements AutoloaderProviderInterface
     {
         return include __DIR__ . '/config/module.config.php';
     }
-    
-    public function getServicesConfig(){
-    	
-    }
 
+    public function getServiceConfig()
+    {
+        return array('factories' => array(
+            'RestResource\PasteResourceListener' => function ($services) {
+                $persistence = $services->get('PastePersistence');
+                return new PasteResourceListener($persistence);
+            },
+        ));
+    }
+    
     public function onBootstrap(MvcEvent $e)
     {
         // You may not need to do this if you're doing it elsewhere in your
@@ -46,5 +52,15 @@ class Module implements AutoloaderProviderInterface
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-    }
+                
+//         	$sharedEvents = $e->getSharedManager();
+//         	$sharedEvents->attach(
+//         			'PhlySimplePage\PageController',
+//         			'dispatch',
+//         			array($this, 'onDispatchDocs'),
+//         			-1
+//         	);
+        }
+        
+ 
 }

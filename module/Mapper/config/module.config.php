@@ -13,5 +13,17 @@ return array(
                 ),
             ),
         ),
-    ),                
+		'connection' => array(
+			'orm_default' => array(
+				'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+					'params' => array(
+						'host' => 'localhost',
+						'port' => '3306',
+						'dbname' => 'untera',
+						'user' => 'root',
+						'password' => 'root',
+					),
+				),
+			),
+		),
 );
