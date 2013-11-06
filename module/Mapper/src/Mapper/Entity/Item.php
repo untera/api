@@ -42,6 +42,16 @@ class Item
      */
     private $date;
 
+    /**
+     * @var \Mapper\Entity\MetadataItem
+     *
+     * @ORM\ManyToOne(targetEntity="Mapper\Entity\MetadataItem")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="metadata_item_id", referencedColumnName="id")
+     * })
+     */
+    private $metadataItem;
+
 
 
     /**
@@ -121,5 +131,28 @@ class Item
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set metadataItem
+     *
+     * @param \Mapper\Entity\MetadataItem $metadataItem
+     * @return Item
+     */
+    public function setMetadataItem(\Mapper\Entity\MetadataItem $metadataItem = null)
+    {
+        $this->metadataItem = $metadataItem;
+    
+        return $this;
+    }
+
+    /**
+     * Get metadataItem
+     *
+     * @return \Mapper\Entity\MetadataItem 
+     */
+    public function getMetadataItem()
+    {
+        return $this->metadataItem;
     }
 }

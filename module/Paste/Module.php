@@ -12,6 +12,8 @@ namespace Paste;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Paste\Listener\PasteResourceListener;
+use Paste\Hydrator\PasteHydrator;
 
 class Module implements AutoloaderProviderInterface
 {
@@ -37,13 +39,9 @@ class Module implements AutoloaderProviderInterface
 
     public function getServiceConfig()
     {
-        return array('factories' => array(
-            'Paste\PasteResourceListener' => function ($services) {
-                $persistence = $services->get('Paste\PersistenceInterface');
-                return new PasteResourceListener($persistence);
-            },
-        ));
+    	return array();
     }
+    
     
     public function onBootstrap(MvcEvent $e)
     {

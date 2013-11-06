@@ -32,10 +32,20 @@ class Module implements AutoloaderProviderInterface
 
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        return include __DIR__ . '/config/mapper.config.php';
     }
     
     public function getServicesConfig(){
+//     	return array(
+//     			'phlyrestfully' => array(
+// 					'renderer' => array(
+//     					'default_hydrator' => 'ArraySerializable',
+//     					'hydrators' => array(
+//     						'Mapper\Entity\Item' => 'Paste\Hydrator\PasteHydrator',
+//     					),
+// 					),
+//     			),
+//     	);
     	
     }
 
