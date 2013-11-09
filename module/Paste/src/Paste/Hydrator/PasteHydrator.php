@@ -6,15 +6,14 @@ use Mapper\Entity\Item;
 
 class PasteHydrator extends ResourceHydrator implements HydratorInterface
 {
-	
+
 	public function extract($object){
-		$sol=array();
-		$sol['id']=$object->getId();
-		$sol['uri']=$object->getUri();
+		$sol = array();
+		$sol['id'] = $object->getId();
+		$sol['uri'] = $object->getUri();
 		$sol['description']=$object->getDescription();
-		$sol['description']=$object->getDescription();
-		$sol['date']=$object->getDate();
-		$sol['metadataItem']=$object->getMetadataItem();
+		$sol['date']=$object->getDate()->format(\DateTime::ISO8601);
+		//$sol['metadataItem']=$object->getMetadataItem();
 		return $sol;
 	}
 
@@ -22,9 +21,9 @@ class PasteHydrator extends ResourceHydrator implements HydratorInterface
 		$object->setId($data['id']);
 		$object->setUri($data['uri']);
 		$object->setDescription($data['description']);
-		$object->setDescription($data['description']);
-		$object->setDate($data['date']);
-		$object->setMetadataItem($data['metadataItem']);
+		// transform to datetime
+		$object->setDate(\DateTime::createFromFormat ( \DateTime::ISO8601, $data['date']));
+		//$object->setMetadataItem($data['metadataItem']);
 		return $object;
 	}
 }
