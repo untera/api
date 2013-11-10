@@ -10,7 +10,7 @@ return array(
 					//'collection_query_whitelist' => array('description','a'),
 					'collection_name'         => 'pastes',
 					'page_size'               => 2,
-					'resource_http_options'   => array('get','update','delete'),
+					'resource_http_options'   => array('get','put','post','delete'),
 					'route_name'              => 'paste/api',
 // 					'accept_criteria' => array(
 // 							'PhlyRestfully\View\RestfulJsonModel' => array(

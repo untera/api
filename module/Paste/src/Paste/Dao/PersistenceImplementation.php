@@ -4,7 +4,6 @@ namespace Paste\Dao;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Mapper\Entity\Item;
-
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as PaginatorAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator as ZendPaginator;
@@ -15,9 +14,10 @@ class PersistenceImplementation extends Item implements ServiceLocatorAwareInter
 
     public function save($data){
     	$entity = new Item();
-    	$entity->setDescription('desc');
-    	$entity->setDate(new \Datetime());
-    	$entity->setUri('http://megusta.com');
+    	$entity->setDescription($data->description);
+    	$date3= \DateTime::createFromFormat ( \DateTime::ISO8601, $data->date);
+    	$entity->setDate($date3);
+    	$entity->setUri($data->uri);
     	$this->getEntityManager()->persist($entity);
     	$this->getEntityManager()->flush();
     	return $entity;
@@ -36,8 +36,14 @@ class PersistenceImplementation extends Item implements ServiceLocatorAwareInter
     }
     
     public function update( $data){
-    	$res = $this->getEntityManager()->find('\\Mapper\\Entity\\Item',$id);
-    	return $res;
+    	$entity = $this->getEntityManager()->find('\\Mapper\\Entity\\Item',$data->id);
+    	$entity->setDescription($data->description);
+    	$date3= \DateTime::createFromFormat ( \DateTime::ISO8601, $data->date);
+    	$entity->setDate($date3);
+    	$entity->setUri($data->uri);
+    	$this->getEntityManager()->persist($entity);
+    	$this->getEntityManager()->flush();
+    	return $entity;
     }
     
     public function fetchAll(){
