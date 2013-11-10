@@ -13,8 +13,14 @@ class PersistenceImplementation extends Item implements ServiceLocatorAwareInter
 
 	protected $services = null;
 
-    public function save(array $data){
-    	echo 'save';die;
+    public function save($data){
+    	$entity = new Item();
+    	$entity->setDescription('desc');
+    	$entity->setDate(new \Datetime());
+    	$entity->setUri('http://megusta.com');
+    	$this->getEntityManager()->persist($entity);
+    	$this->getEntityManager()->flush();
+    	return $entity;
     }
     
     public function fetch($id){
@@ -24,10 +30,12 @@ class PersistenceImplementation extends Item implements ServiceLocatorAwareInter
 
     public function delete($id){
     		$res = $this->getEntityManager()->find('\\Mapper\\Entity\\Item',$id);
-    		return $res;			
+    		$this->getEntityManager()->remove($res);
+    		$this->getEntityManager()->flush();
+    		return true;			
     }
     
-    public function update(array $data){
+    public function update( $data){
     	$res = $this->getEntityManager()->find('\\Mapper\\Entity\\Item',$id);
     	return $res;
     }

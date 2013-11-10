@@ -3,8 +3,8 @@ namespace Paste\Dao;
 
 interface PersistenceInterface
 {
-	public function save(array $data);
-	public function update(array $data);
+	public function save( $data);
+	public function update( $data);
 	public function delete($id);
 	public function fetch($id);
 	public function fetchAll();

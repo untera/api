@@ -5,24 +5,31 @@ return array(
 				'Paste\ApiController' => array(
 					'identifier'              => 'Pastes',
 					'listener'                => 'Paste\Listener\PasteResourceListener',
-					'resource_identifiers'    => array('PasteResource'),
+					//'resource_identifiers'    => array('PasteResource'),
 					'collection_http_options' => array('get', 'post'),
+					//'collection_query_whitelist' => array('description','a'),
 					'collection_name'         => 'pastes',
 					'page_size'               => 2,
-					'resource_http_options'   => array('get'),
+					'resource_http_options'   => array('get','update','delete'),
 					'route_name'              => 'paste/api',
+// 					'accept_criteria' => array(
+// 							'PhlyRestfully\View\RestfulJsonModel' => array(
+// 									'application/json',
+// 									'text/json',
+// 							),
+// 					),
 				),
 			),
 			'renderer' => array(
 				'default_hydrator' => 'ArraySerializable',
 				'hydrators' => array(
-					'Mapper\Entity\Item' => 'PasteHydrator',
+					'Mapper\Entity\Item' => 'PasteHydrator1',
 				),
 			),
 		),
 		'hydrators' => array(
 			'invokables' => array(
-						'PasteHydrator' => 'Paste\Hydrator\PasteHydrator',
+						'PasteHydrator1' => 'Paste\Hydrator\PasteHydrator',
 			),
 			'initializers' => array(
 				function ($instance, $pluginManager) {

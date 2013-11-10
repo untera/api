@@ -1,9 +1,9 @@
 <?php
 namespace Paste\Listener;
 
-use PhlyRestfully\Exception\CreationException;
 use PhlyRestfully\Exception\UpdateException;
 use PhlyRestfully\Exception\DomainException;
+use PhlyRestfully\Exception\CreationException;
 use PhlyRestfully\ResourceEvent;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
@@ -20,11 +20,13 @@ class PasteResourceListener extends AbstractListenerAggregate
 
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('create', array($this, 'onCreate'));
-        $this->listeners[] = $events->attach('update', array($this, 'onUpdate'));
-        $this->listeners[] = $events->attach('delete', array($this, 'onDelete'));
-        $this->listeners[] = $events->attach('fetch', array($this, 'onFetch'));
+    	
+    	$this->listeners[] = $events->attach('create',   array($this, 'onCreate'));
+        $this->listeners[] = $events->attach('update',   array($this, 'onUpdate'));
+        $this->listeners[] = $events->attach('delete',   array($this, 'onDelete'));
+        $this->listeners[] = $events->attach('fetch',    array($this, 'onFetch'));
         $this->listeners[] = $events->attach('fetchAll', array($this, 'onFetchAll'));
+    	
     }
 
     public function onCreate(ResourceEvent $e)
