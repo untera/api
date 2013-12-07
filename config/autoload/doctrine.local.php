@@ -6,7 +6,7 @@ return array(
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
                     'params' => array(
                         'user' => 'root',
-                        'password' => 'root',
+                        'password' => 'myslibre',
                 ),
             ),
         )
